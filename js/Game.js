@@ -5,17 +5,21 @@
 class Game {
     constructor() {
         this.missed = 0;
-        this.phrases = ['And so the adventure begins', 
-                        'Take a risk or lose the chance', 
-                        'Do it with passion or not at all', 
-                        'A smooth sea never made a skillful sailor', 
-                        'All you need is love'];
+        this.phrases = ['All in', 
+                        'Win or lose', 
+                        'No pain no gain', 
+                        'Winning', 
+                        'Kind regards'];
         this.activePhrase = null; // This is the Phrase object currently in play. The initial value is null. 
     }
 
+    /**
+    * Begins game by selecting a random phrase and displaying it to user
+    */
     startGame() {
-        this.activePhrase = getRandomPhrase(); // activePhrase property will be set to the Phrase object returned from a call to the getRandomPhrase() method.
-        phrase.addPhraseToDisplay(this.activePhrase);
+        document.querySelector('#overlay').style.display = 'none';
+        document.querySelector('#btn__reset').style.display = 'none';
+        this.activePhrase = this.getRandomPhrase();
     }
 
     /**

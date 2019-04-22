@@ -17,7 +17,15 @@ class Phrase {
             let li = document.createElement('li'); 
             document.querySelector('#phrase ul').appendChild(li);
             li.innerHTML += letter;
-            li.className += `hide letter ${letter}`;
+            
+            let letterRgx = /^[A-Za-z]+$/;
+            if (letter.match(letterRgx)) {
+                li.className += `hide letter ${letter}`;
+            } else if (li.innerHTML === ' ') {
+                li.className += 'hide space';
+            }
+            
+            
         });
     }
 
