@@ -11,9 +11,9 @@ class Phrase {
     * Display phrase on game board
     */
     addPhraseToDisplay() {
-        let randomPhraseArray = Array.from(game.getRandomPhrase());
+        let activePhraseArray = Array.from(game.activePhrase);
 
-        randomPhraseArray.forEach(letter => {
+        activePhraseArray.forEach(letter => {
             let li = document.createElement('li'); 
             document.querySelector('#phrase ul').appendChild(li);
             li.innerHTML += letter;
@@ -24,16 +24,51 @@ class Phrase {
             } else if (li.innerHTML === ' ') {
                 li.className += 'hide space';
             }
-            
-            
         });
     }
 
-    checkLetter () {
-
+    /**
+    * Checks if passed letter is in phrase
+    * @param (string) letter - Letter to check
+    */
+    checkLetter (letterGuess) {
+        let liPhrase = document.querySelectorAll('#phrase ul li');
+        
+        liPhrase.forEach(liLetter => {
+            if (liLetter.textContent === letterGuess) {
+                return true;
+            } else {
+                return false;
+            }
+        });
     }
 
-    showMatchedLetter () {
-
+    /**
+    * Displays passed letter on screen after a match is found
+    * @param (string) letter - Letter to display
+    */
+    showMatchedLetter (letterGuess) {
+        let liPhrase = document.querySelectorAll('#phrase ul li');
+        
+        liPhrase.forEach(liLetter => {
+            if (liLetter.textContent === letterGuess) {
+                let li = document.querySelector('.hide.letter.' + letterGuess);   
+                li.className = `show letter ${letterGuess}`;
+            }
+        });
+        
     }
+        
+    
+    
 }
+
+
+// const displayKeyboard = document.getElementsByClassName('key');
+//         for (let i = 0; i < displayKeyboard.length; i++) {
+//         displayKeyboard[i].addEventListener("click", function(event) {
+//         console.log(event.target.textContent);
+//         });
+//         }
+
+

@@ -20,6 +20,8 @@ class Game {
         document.querySelector('#overlay').style.display = 'none';
         document.querySelector('#btn__reset').style.display = 'none';
         this.activePhrase = this.getRandomPhrase();
+        let phrase = new Phrase();
+        phrase.addPhraseToDisplay();
     }
 
     /**
@@ -42,7 +44,7 @@ class Game {
     }
 
     handleInteraction() {
-
+        
     }
 
     removeLife() {
