@@ -11,6 +11,5 @@ startGameBtn.addEventListener('click', function () {
    game.startGame();
 });
 
-let phrase = new Phrase();
 
 
