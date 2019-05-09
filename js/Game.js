@@ -19,9 +19,8 @@ class Game {
     startGame() {
         document.querySelector('#overlay').style.display = 'none';
         document.querySelector('#btn__reset').style.display = 'none';
-        this.activePhrase = this.getRandomPhrase();
-        let phrase = new Phrase();
-        phrase.addPhraseToDisplay();
+        this.activePhrase = new Phrase(this.getRandomPhrase());
+        this.activePhrase.addPhraseToDisplay();
     }
 
     /**
@@ -101,5 +100,7 @@ class Game {
             overlay.className = 'lose';
             gameOverMsg.textContent = 'You have lost the game!';
         }
+
+        this.missed = 0;
     }
 }
