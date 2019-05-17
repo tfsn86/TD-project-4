@@ -4,13 +4,13 @@
 
 class Game {
     constructor() {
-        this.missed = 0;
+        this.missed = 0; // This works as a counter for missed letter guesses
         this.phrases = ['All in', 
                         'Win or lose', 
                         'No pain no gain', 
                         'Winning', 
                         'Kind regards'];
-        this.activePhrase = null; // This is the Phrase object currently in play. The initial value is null. 
+        this.activePhrase = null; // This is the Phrase object currently in play.
     }
 
     /**
@@ -42,9 +42,24 @@ class Game {
         }
     }
 
-    handleInteraction() {
-
-    }
+    /**
+    * Handles display keyboard and computer keyboard guesses
+    * @param - The button element
+    */
+    handleInteraction(button) {
+        let guess = button.textContent;
+        if (this.activePhrase.checkLetter(guess) === true) {
+            this.activePhrase.showMatchedLetter(guess);
+            button.className = 'chosen';
+            if (this.checkforWin()) {
+                this.gameOver(true);
+            }
+        } else if (this.activePhrase.checkLetter(guess) === false) {
+            button.className = 'wrong';
+            this.removeLife();
+        }
+        button.disabled = true;
+    };
 
     /**
     * Increases the value of the missed property
@@ -81,6 +96,9 @@ class Game {
 
         if (winTrack.length === 0) {
             this.gameOver(true);
+            return true;
+        } else if (winTrack.length !== 0) {
+            return false;
         }
     }
 
@@ -101,6 +119,29 @@ class Game {
             gameOverMsg.textContent = 'You have lost the game!';
         }
 
+        /**
+         * Resets the game when one game is played on "Start game" i clicked
+         */
         this.missed = 0;
+        document.querySelector('#btn__reset').style.display = 'block';
+
+        const ul = document.querySelector('#phrase ul');
+        const totalLis = ul.childElementCount;
+        for (let i = 0; i < totalLis; i++) {
+            ul.removeChild(ul.firstElementChild);
+        }
+        
+        const heartLivesReset = Array.from(document.querySelectorAll('.tries'));
+        heartLivesReset
+            .filter(item =>  !item.children[0].src.includes('liveHeart.png'))
+            .map(item => item.children[0].src = item.children[0].src.replace('lostHeart.png','liveHeart.png'));
+        
+        const displayKeyboardReset = Array.from(document.querySelectorAll('#qwerty button'));
+        displayKeyboardReset
+            .filter(item => item.className !== 'key')
+            .map(item => {
+                item.className = 'key';
+                item.disabled = false;
+                });
     }
 }
