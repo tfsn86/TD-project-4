@@ -29,17 +29,7 @@ class Game {
     */
     getRandomPhrase() {
         let randomPhraseNumber = Math.floor(Math.random() * this.phrases.length);
-        if (randomPhraseNumber === 0) {
-            return this.phrases[0];
-        } else if (randomPhraseNumber === 1) {
-            return this.phrases[1];
-        } else if (randomPhraseNumber === 2) {
-            return this.phrases[2];
-        } else if (randomPhraseNumber === 3) {
-            return this.phrases[3];
-        } else if (randomPhraseNumber === 4) {
-            return this.phrases[4];
-        }
+        return this.phrases[randomPhraseNumber];
     }
 
     /**
