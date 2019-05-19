@@ -23,7 +23,7 @@ const displayKeyboard = document.getElementsByClassName('key');
 let buttonArray = Array.from(document.querySelectorAll('#qwerty button'));
 buttonArray.forEach((item) => {
     item.addEventListener('click', function(event) {
-        e.preventDefault();
+        event.preventDefault();
         game.handleInteraction(event.target);
     })
 });
